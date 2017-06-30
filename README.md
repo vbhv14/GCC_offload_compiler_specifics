@@ -7,4 +7,5 @@ nvptx tools nvptx-newlib will be needed to build offload compiler from source.
 Dependencies:  nvptx-tools and nvptx-newlib (downloadable from github).
 
 nvptx-tools: https://github.com/MentorEmbedded/nvptx-tools
+
 nvptx-newlib: https://github.com/MentorEmbedded/nvptx-newlib
