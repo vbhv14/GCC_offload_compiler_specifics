@@ -1,0 +1,31 @@
+(Ubuntu 16.10)
+•	Version of  Nvidia driver  and linux header should be compatible with each other.
+•	Check the current linux header and install a compatible version.
+
+
+
+To list the currently installed headers:
+dpkg --list | grep linux-image 
+dpkg --list | grep linux-header
+
+
+
+After installation of CUDA toolkit, paths should be added:
+vi ~/.bashrc
+export CUDA_HOME=/usr/local/cuda-8.0
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+PATH=${CUDA_HOME}/bin:${PATH}
+PATH=${CUDA_HOME}/bin/nvcc:${PATH}
+export PATH
+
+
+For building nvpts tools:
+
+cd /home/invoker/test/build/nvptx-tools
+
+With these flags:
+
+/home/invoker/test/src/nvptx-tools/configure --prefix=/home/invoker/test/install --target=nvptx-none --with-cuda-driver-include=/usr/local/cuda-8.0/include --with-cuda-driver-lib=/usr/local/cuda-8.0/lib64  --with-cuda-runtime-include=/usr/local/cuda-8.0/include --with-cuda-runtime-lib=/usr/local/cuda-8.0/lib64 CC="gcc -m64" CXX="g++ -m64"
+
+make 
+make install

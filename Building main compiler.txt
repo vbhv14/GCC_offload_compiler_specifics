@@ -1,0 +1,30 @@
+For offload compiler :
+
+
+Linking nvptx-newlib with gcc-newlib: 
+
+ln -vs /home/invoker/test/src/nvptx-newlib/newlib /home/invoker/test/src/gcc-6.2/newlib
+
+ln -vs . /home/invoker/test/install/nvptx-none/usr
+
+cd /home/invoker/test/build/ol-compiler
+
+/home/invoker/test/src/gcc-6.2/configure --target=nvptx-none  --prefix=  --enable-languages=c,c++  --enable-checking=yes,df,fold,rtl --enable-as-accelerator-for=x86_64-pc-linux-gnu --with-sysroot=/home/invoker/test/install/nvptx-none --with-build-sysroot=/home/invoker/test/install/nvptx-none  --with-build-time-tools=/home/invoker/test/install/nvptx-none/bin --disable-multilib --disable-sjlj-exceptions --enable-newlib-io-long-long CC="gcc -m64" CXX="g++ -m64"
+
+make 
+make DESTDIR=/home/invoker/test/install install
+
+
+
+
+Building:
+
+cd /home/invoker/test/build/core-compiler
+
+/home/invoker/test/src/gcc-6.2/configure   --prefix=   --disable-bootstrap   --enable-languages=c,c++   --disable-multilib   --enable-offload-targets=nvptx-none=/home/invoker/test/install --with-cuda-driver-include=/usr/local/cuda-8.0/include  --with-sysroot= CC="gcc -m64" CXX="g++ -m64"
+
+make 
+make DESTDIR=/home/invoker/test/install install
+
+After this add appropriate ‘Path’  and use ‘update-alternatives’ to switch between default compiler and this compiler.
+
